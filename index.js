@@ -160,7 +160,11 @@ module.exports = function autoRecord() {
             method,
           },
           (req) => {
-            let newResponse = response.response;
+            let getIndex = index;
+            if (index >= sortedRoutes[method][url].length) {
+              getIndex = sortedRoutes[method][url].length - 1;
+            }
+            let newResponse = sortedRoutes[method][url][getIndex].response; 
             if (response.fixtureId) {
               newResponse = {
                 fixture: `${fixturesFolderSubDirectory}/${response.fixtureId}.json`,
